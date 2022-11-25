@@ -1,0 +1,55 @@
+<form class="form-pelicula" >
+  <mat-form-field class="example-full-width" appearance="outline">
+    <mat-label >Buscador</mat-label>
+    <input [(ngModel)]="titleMovie" (ngModelChange)='ChosenMovie($event)'
+           placeholder="Peliculas"
+           aria-label="Number"
+           matInput
+           [formControl]="myControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"  >
+      <mat-option *ngFor="let option of filteredOptions | async; let i = index" [value]="option" >
+       {{i+1}}. {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+
+
+<div class="Movie">
+<mat-card  *ngFor="let film of films">
+  <mat-card-title><b>Titulo: </b>{{film.title}}</mat-card-title>
+  <mat-card-subtitle><b>Localidad: </b>{{film.locations}}</mat-card-subtitle>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" >Ver donde fue filmada</button>
+  </mat-card-actions>
+</mat-card>
+<br>
+</div>
+
+
+
+
+<div class="div-mapa">
+  <mat-card class="card-api" *ngFor="let film of films">
+    <mat-card-title-group>
+      <mat-card-title><b>Titulo: </b>{{film.title}}</mat-card-title>
+      <mat-card-subtitle><b>Año Filmacion: </b>{{film.release_year}}</mat-card-subtitle>
+      <mat-card-subtitle><b>Localidad: </b>{{film.locations}}</mat-card-subtitle>
+      <mat-card-subtitle><b>Hechos Graciosos: </b>{{film.fun_facts}}</mat-card-subtitle>
+      <mat-card-subtitle><b>compania de produccion: </b>{{film.production_company}}</mat-card-subtitle>
+      <mat-card-subtitle><b>Distribuidor: </b> {{film.distributor}}</mat-card-subtitle>
+      <mat-card-subtitle><b>Director:</b>{{film.director}}</mat-card-subtitle>
+      <mat-card-subtitle><b>Escritor: </b>{{film.writer}}</mat-card-subtitle>
+      <mat-card-subtitle><b>Actor Principal: </b>{{film.actor_1}}</mat-card-subtitle>
+      <mat-card-subtitle><b>Actor Secundario:</b> {{film.actor_2}}</mat-card-subtitle>
+      <mat-card-subtitle><b>Actor Terciario: </b>{{film.actor_3}}</mat-card-subtitle>
+    </mat-card-title-group>
+  </mat-card>
+
+<mat-card class="card-mapa">
+  <div id="map"></div>
+</mat-card>
+
+</div>
